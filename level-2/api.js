@@ -1,5 +1,21 @@
+function btoa(str) {
+  var buffer;
+
+  if (str instanceof Buffer) {
+    buffer = str;
+  } else {
+    buffer = new Buffer(str.toString(), 'binary');
+  }
+
+  return buffer.toString('base64');
+}
+
 var express = require('/node_modules/express');
 var bodyParser = require('/node_modules/body-parser');
+var fs = require('fs');
+
+var answer = btoa(fs.readFileSync('/secret/email.txt'));
+var level3 = require('/secret/levels/3.js');
 var PORT = 7772;
 
 
@@ -29,7 +45,13 @@ var startApi = function () {
   });
 
   router.post('/check', function (req, res) {
-    res.json(req.body);
+    if (req.body.content == answer) {
+      res.json(level3);
+    } else {
+      res.json({error: 'Oh no... Email is not valid!',
+        debug: req.body.content + ' - ' + answer
+      });
+    }
   });
 
   // API routes

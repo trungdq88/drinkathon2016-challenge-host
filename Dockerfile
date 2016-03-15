@@ -14,9 +14,10 @@ RUN npm install
 COPY conf/supervisord.conf /usr/local/etc/supervisord.conf
 
 # Prepare
-RUN mkdir src/
+RUN mkdir src/ && mkdir /secret
 WORKDIR src/
 
+ADD secret /secret
 ADD level-0 level-0
 ADD level-2 level-2
 

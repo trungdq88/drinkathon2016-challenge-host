@@ -1,12 +1,12 @@
 <script src="jquery.js"></script>
-<input id="input" type="text" />
+<textarea id="input"></textarea>
 <input id="button" type="button" value="submit">
 <script>
 $('#button').click(function () {
   $.ajax({
     url: 'api/check',
     type: 'post',
-    data: { content: $('#input').val() },
+    data: { content: btoa($('#input').val()) },
   }).done(function (msg) {
     console.log(msg);
   });
