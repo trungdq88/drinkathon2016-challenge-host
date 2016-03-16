@@ -3,3 +3,6 @@ web:
   ports:
     - "80:80"
     - "7772:7772"
+  volumes:
+    - ./levels:/src/levels
+    - ./secret:/secret

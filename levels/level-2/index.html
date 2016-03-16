@@ -1,0 +1,32 @@
+<script src="jquery.js"></script>
+<textarea id="input"></textarea>
+<input id="button" type="button" value="submit">
+<hr/>
+<input type="text" id="island_name" placeholder="Island name" />
+<input type="text" id="island_lat" placeholder="Island lat" />
+<input type="text" id="island_lng" placeholder="Island lng" />
+<input id="goto_island" type="button" value="submit">
+<script>
+$('#button').click(function () {
+  $.ajax({
+    url: 'api/check',
+    type: 'post',
+    data: { content: btoa($('#input').val()) },
+  }).done(function (msg) {
+    console.log(msg);
+  });
+});
+$('#goto_island').click(function () {
+  $.ajax({
+    url: 'api/next',
+    type: 'post',
+    data: {
+      island_name: $('#island_name').val(),
+      island_lat: $('#island_lat').val(),
+      island_lng: $('#island_lng').val(),
+    }
+  }).done(function (msg) {
+    console.log(msg);
+  });
+});
+</script>

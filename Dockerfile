@@ -18,8 +18,9 @@ RUN mkdir src/ && mkdir /secret
 WORKDIR src/
 
 ADD secret /secret
-ADD level-0 level-0
-ADD level-2 level-2
+ADD levels levels
+
+VOLUME ["/src/levels", "/secret"]
 
 # Start
 ADD entrypoint.sh .
