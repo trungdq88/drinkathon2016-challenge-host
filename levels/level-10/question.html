@@ -1,0 +1,18 @@
+<script src="/jquery.js"></script>
+FINAL LEVEL story
+<hr/>
+<input type="text" id="island_name" placeholder="Token" value="" />
+<input id="goto_island" type="button" value="submit">
+<script>
+$('#goto_island').click(function () {
+  $.ajax({
+    url: '/api/next',
+    type: 'post',
+    data: {
+      token: $('#island_name').val(),
+    }
+  }).done(function (msg) {
+    console.log(msg);
+  });
+});
+</script>
