@@ -54,9 +54,9 @@ var startApi = function () {
   });
 
   router.post('/next', function (req, res) {
-    if (req.body.island_name === level3.name &&
-        req.body.island_lat === level3.lat &&
-        req.body.island_lng === level3.lng) {
+    if (level3.check(req.body.island_name,
+                     req.body.island_lat,
+                     req.body.island_lng)) {
       res.json({next_island_url: 'http://asd'});
     } else {
       res.json({error: 'Hm... where is that?'});
@@ -64,9 +64,9 @@ var startApi = function () {
   });
 
   router.post('/show', function (req, res) {
-    if (req.body.island_name === level2.name &&
-        req.body.island_lat === level2.lat &&
-        req.body.island_lng === level2.lng) {
+    if (level2.check(req.body.island_name,
+                     req.body.island_lat,
+                     req.body.island_lng)) {
       res.sendFile(__dirname + '/question.html');
     } else {
       res.json({error: 'Uhh... we only accept guests from previous island.'});
