@@ -1,0 +1,22 @@
+<script src="/jquery.js"></script>
+Level 9 story
+<hr/>
+<input type="text" id="island_name" placeholder="Island name" value="" />
+<input type="text" id="island_lat" placeholder="Island lat" />
+<input type="text" id="island_lng" placeholder="Island lng" />
+<input id="goto_island" type="button" value="submit">
+<script>
+$('#goto_island').click(function () {
+  $.ajax({
+    url: '/api/next',
+    type: 'post',
+    data: {
+      island_name: $('#island_name').val(),
+      island_lat: $('#island_lat').val(),
+      island_lng: $('#island_lng').val(),
+    }
+  }).done(function (msg) {
+    console.log(msg);
+  });
+});
+</script>
