@@ -16,6 +16,7 @@ var fs = require('fs');
 
 var answer = btoa(fs.readFileSync('/secret/email.txt'));
 var level3 = require('/secret/levels/3.js');
+var level1 = require('/secret/levels/1.js');
 var PORT = 7772;
 
 
@@ -62,8 +63,14 @@ var startApi = function () {
     }
   });
 
-  router.get('/show', function (req, res) {
-    res.sendFile(__dirname + '/question.html');
+  router.post('/show', function (req, res) {
+    if (req.body.island_name === level1.name &&
+        req.body.island_lat === level1.lat &&
+        req.body.island_lng === level1.lng) {
+      res.sendFile(__dirname + '/question.html');
+    } else {
+      res.json({error: 'Uhh... we only accept guests from previous island.'});
+    }
   });
 
   // API routes
