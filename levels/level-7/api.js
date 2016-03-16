@@ -3,7 +3,7 @@ var bodyParser = require('/node_modules/body-parser');
 var fs = require('fs');
 
 var level8 = require('/secret/levels/8.js');
-var level6 = require('/secret/levels/6.js');
+var level7 = require('/secret/levels/7.js');
 var PORT = 7777;
 
 
@@ -43,9 +43,9 @@ var startApi = function () {
   });
 
   router.post('/show', function (req, res) {
-    if (req.body.island_name === level6.name &&
-        req.body.island_lat === level6.lat &&
-        req.body.island_lng === level6.lng) {
+    if (req.body.island_name === level7.name &&
+        req.body.island_lat === level7.lat &&
+        req.body.island_lng === level7.lng) {
       res.sendFile(__dirname + '/question.html');
     } else {
       res.json({error: 'Uhh... we only accept guests from previous island.'});
