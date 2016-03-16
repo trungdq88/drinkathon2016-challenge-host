@@ -1,22 +1,10 @@
-function btoa(str) {
-  var buffer;
-
-  if (str instanceof Buffer) {
-    buffer = str;
-  } else {
-    buffer = new Buffer(str.toString(), 'binary');
-  }
-
-  return buffer.toString('base64');
-}
-
 var express = require('/node_modules/express');
 var bodyParser = require('/node_modules/body-parser');
 var fs = require('fs');
 
-var answer = btoa(fs.readFileSync('/secret/email.txt'));
-var level3 = require('/secret/levels/3.js');
-var PORT = 7772;
+var level8 = require('/secret/levels/8.js');
+var level6 = require('/secret/levels/6.js');
+var PORT = 7777;
 
 
 // Error reporting
@@ -44,13 +32,23 @@ var startApi = function () {
     res.json({hello: 'world'});
   });
 
-  router.post('/check', function (req, res) {
-    if (req.body.content == answer) {
-      res.json(level3);
+  router.post('/next', function (req, res) {
+    if (req.body.island_name === level8.name &&
+        req.body.island_lat === level8.lat &&
+        req.body.island_lng === level8.lng) {
+      res.json({next_island_url: 'http://asd'});
     } else {
-      res.json({error: 'Oh no... Email is not valid!',
-        debug: req.body.content + ' - ' + answer
-      });
+      res.json({error: 'Hm... where is that?'});
+    }
+  });
+
+  router.post('/show', function (req, res) {
+    if (req.body.island_name === level6.name &&
+        req.body.island_lat === level6.lat &&
+        req.body.island_lng === level6.lng) {
+      res.sendFile(__dirname + '/question.html');
+    } else {
+      res.json({error: 'Uhh... we only accept guests from previous island.'});
     }
   });
 
