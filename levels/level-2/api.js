@@ -48,7 +48,7 @@ var startApi = function () {
     if (req.body.content === answer) {
       res.json(level3);
     } else {
-      res.json({error: 'Oh no... Email is not valid!'});
+      res.json({error: 'Oh no... That email is not valid!'});
     }
   });
 
@@ -60,6 +60,10 @@ var startApi = function () {
     } else {
       res.json({error: 'Hm... where is that?'});
     }
+  });
+
+  router.get('/show', function (req, res) {
+    res.sendFile(__dirname + '/question.html');
   });
 
   // API routes
